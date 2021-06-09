@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { registerAction } from '../../store/actions';
+import { registerAction } from '../../store/actions/register.actions';
 import { isSubmittingSelector } from '../../store/selectors';
+import { RegisterRequestInterface } from '../../types/registerRequest.interface';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
 
   constructor (
     private fb: FormBuilder,
-    private store: Store
+    private store: Store,
   ){}
 
   ngOnInit(): void{
@@ -41,7 +42,10 @@ export class RegisterComponent implements OnInit {
   };
 
   onSubmit(): void{
-    console.log('submit', this.form.value, this.form.valid);
-    this.store.dispatch(registerAction(this.form.value));
+    // console.log('submit', this.form.value, this.form.valid);
+    const request: RegisterRequestInterface = {
+      user: this.form.value
+    }
+    this.store.dispatch(registerAction({request}));
   }
 }
