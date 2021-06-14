@@ -23,7 +23,7 @@ const articleReducer = createReducer(
     getArticleSuccessAction,
     (state, action): ArticleStateInterface => ({
       ...state,
-      isLoading: true,
+      isLoading: false,
       data: action.article
     })
   ),
