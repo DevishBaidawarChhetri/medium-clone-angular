@@ -7,8 +7,10 @@ import { ErrorMessageModule } from "../shared/modules/errorMessage/errorMessage.
 import { LoadingModule } from "../shared/modules/loading/loading.module";
 import { TagListModule } from "../shared/modules/tagList/tagList.module";
 
-import { ArticleService } from "../shared/services/article.service";
+import { ArticleService as SharedArticleService } from "../shared/services/article.service";
 import { ArticleComponent } from "./components/article/article.component";
+import { ArticleService } from "./services/article.service";
+import { DeleteArticleEffect } from "./store/effects/deleteArticle.effect";
 import { GetArticleEffect } from "./store/effects/getArticle.effect";
 import { reducers } from "./store/reducers";
 
@@ -24,7 +26,7 @@ const routes = [
     CommonModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('article', reducers),
-    EffectsModule.forFeature([GetArticleEffect]),
+    EffectsModule.forFeature([GetArticleEffect, DeleteArticleEffect]),
     LoadingModule,
     ErrorMessageModule,
     TagListModule
@@ -33,6 +35,7 @@ const routes = [
     ArticleComponent
   ],
   providers: [
+    SharedArticleService,
     ArticleService
   ]
 })
