@@ -1,1 +1,46 @@
-User profile
+<div class="profile-page" *ngIf="userProfile">
+  <div class="user-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-10 offset-md-1">
+          <img [src]="userProfile.image" alt="userProfile.username" class="user-img">
+          <h4>{{userProfile.username}}</h4>
+          <p>{{userProfile.bio}}</p>
+          <a *ngIf="isCurrentUserProfile$ | async" class="btn btn-sm btn-outline-secondary" [routerLink]="['/settings']">
+            <i class="ion-gear-a"></i>
+            Edit Profile Settings
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-10 offset-md-1">
+        <div class="articles-toggler">
+          <ul class="nav nav-pills outline-active">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLink]="['/profiles', userProfile.username]"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+              >My Posts</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLink]="['/profiles', userProfile.username, 'favorites']"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+              >
+              Favorite Posts
+              </a>
+            </li>
+          </ul>
+        </div>
+        <app-feed [apiUrl]="getApiUrl()"></app-feed>
+      </div>
+    </div>
+  </div>
+</div>

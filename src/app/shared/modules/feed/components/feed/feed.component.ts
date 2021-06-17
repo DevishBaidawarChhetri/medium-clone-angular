@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
@@ -16,7 +16,7 @@ import { isLoggedInSelector } from "src/app/auth/store/selectors";
   styleUrls: ['./feed.component.scss']
 })
 
-export class FeedComponent implements OnInit, OnDestroy{
+export class FeedComponent implements OnInit, OnDestroy, OnChanges{
   @Input ('apiUrl') apiUrlProps: string;
 
   feed$: Observable<GetFeedResponseInterface | null>;
@@ -26,7 +26,7 @@ export class FeedComponent implements OnInit, OnDestroy{
   baseUrl: string;
   queryParamsSubscription: Subscription;
   currentPage: number;
-  isLoggedIn$: Observable<boolean>
+  isLoggedIn$: Observable<boolean>;
 
   constructor(
     private store: Store,
@@ -37,6 +37,14 @@ export class FeedComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.initializeValues();
     this.initializeListeners();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const isApiUrlChanged = !changes.apiUrlProps.firstChange &&
+    !changes.apiUrlProps.currentValue !== changes.apiUrlProps.previousValue
+    if(isApiUrlChanged){
+      this.fetchFeed();
+    }
   }
 
   ngOnDestroy(): void {
