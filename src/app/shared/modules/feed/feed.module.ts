@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
+import { AddToFavoriteModule } from "../addToFavorites/addToFavorites.module";
 import { ErrorMessageModule } from "../errorMessage/errorMessage.module";
 import { LoadingModule } from "../loading/loading.module";
 import { PaginationModule } from "../pagination/pagination.module";
@@ -22,7 +23,8 @@ import { reducers } from "./store/reducers";
     ErrorMessageModule,
     LoadingModule,
     PaginationModule,
-    TagListModule
+    TagListModule,
+    AddToFavoriteModule
   ],
   declarations: [
     FeedComponent

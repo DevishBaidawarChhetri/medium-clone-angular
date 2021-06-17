@@ -8,6 +8,7 @@ import { environment } from "src/environments/environment";
 import { getFeedAction } from "../../store/actions/getFeed.action";
 import { errorSelector, feedSelector, isLoadingSelector } from "../../store/selectors";
 import { GetFeedResponseInterface } from "../../types/getFeedResponse.interface";
+import { isLoggedInSelector } from "src/app/auth/store/selectors";
 
 @Component({
   selector: 'app-feed',
@@ -25,6 +26,7 @@ export class FeedComponent implements OnInit, OnDestroy{
   baseUrl: string;
   queryParamsSubscription: Subscription;
   currentPage: number;
+  isLoggedIn$: Observable<boolean>
 
   constructor(
     private store: Store,
@@ -45,6 +47,7 @@ export class FeedComponent implements OnInit, OnDestroy{
     this.feed$ = this.store.pipe(select(feedSelector));
     this.error$ = this.store.pipe(select(errorSelector));
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
+    this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
     this.baseUrl = this.router.url.split('?')[0];
   }
 
