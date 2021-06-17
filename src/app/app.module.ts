@@ -15,6 +15,7 @@ import { CreateArticleModule } from './createArticle/createArticle.module';
 import { EditArticleModule } from './editArticle/editArticle.module';
 import { GlobalFeedModule } from './globalFeed/globalFeed.module';
 import { SettingsModule } from './settings/settings.module';
+import { FooterModule } from './shared/modules/footer/footer.module';
 import { TopBarModule } from './shared/modules/topBar/topBar.module';
 import { AuthInterceptor } from './shared/services/authinterceptor.service';
 import { PersistanceService } from './shared/services/persistance.service';
@@ -45,7 +46,8 @@ import { YourFeedModule } from './yourFeed/yourFeed.module';
     ArticleModule,
     EditArticleModule,
     SettingsModule,
-    UserProfileModule
+    UserProfileModule,
+    FooterModule
   ],
   providers: [
     PersistanceService,

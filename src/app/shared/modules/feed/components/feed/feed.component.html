@@ -10,7 +10,7 @@
         <a [routerLink]="['/profiles', article.author.username]" class="author">
           {{article.author.username}}
         </a>
-        <span class="date">{{article.createdAt}}</span>
+        <span class="date">{{article.createdAt | date}}</span>
       </div>
       <div class="pull-xs-right">
         <app-add-to-favorites
